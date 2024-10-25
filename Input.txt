@@ -1,0 +1,22 @@
+@page "/numeric-input"
+
+<h3>Enter 6-digit number:</h3>
+
+<InputNumber @bind-Value="InputValue" @oninput="ValidateInput" />
+@if (!IsValid)
+{
+    <div style="color: red;">Please enter exactly 6 digits.</div>
+}
+
+@code {
+    private int? InputValue { get; set; }
+    private bool IsValid { get; set; } = true;
+
+    private void ValidateInput(ChangeEventArgs e)
+    {
+        var input = e.Value?.ToString() ?? string.Empty;
+
+        // Ensure input is numeric and has exactly 6 digits
+        IsValid = input.Length == 6;
+    }
+}
